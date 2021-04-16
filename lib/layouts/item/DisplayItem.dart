@@ -5,6 +5,10 @@ import 'package:resteraunt_starter/models/menu/Item.dart';
 class DisplayItem extends StatefulWidget {
   final Item item;
 
+  // Extras == one from many ie. sauces
+  // can Have multiple groups of extras
+  // Sides == many can be free or cost money
+
   const DisplayItem({Key key, this.item}) : super(key: key);
 
   @override
