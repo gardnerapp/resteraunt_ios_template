@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resteraunt_starter/components/CustomAppBar.dart';
+import 'package:resteraunt_starter/layouts/item/SideSelector.dart';
 import 'package:resteraunt_starter/models/menu/Item.dart';
 
 class DisplayItem extends StatefulWidget {
@@ -18,7 +19,11 @@ class DisplayItem extends StatefulWidget {
 class _DisplayItemState extends State<DisplayItem> {
   @override
   Widget build(BuildContext context) {
+
     var description = this.widget.item.description;
+    var sideCollections = this.widget.item.sideCollections;
+    var extras = this.widget.item.extras;
+
     return Scaffold(
         appBar: CustomAppBar(this.widget.item.name),
         body: Container(
@@ -32,6 +37,9 @@ class _DisplayItemState extends State<DisplayItem> {
                       textAlign: TextAlign.center,
                     )
                   : SizedBox(height: 0.0),
+              sideCollections != null || sideCollections != []
+                  ? sideCollections.map((e) => SideSelector(sideCollection: e))
+                  : SizedBox(height: 0.0)
             ],
           ),
         ));
