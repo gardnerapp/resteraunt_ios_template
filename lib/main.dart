@@ -5,6 +5,7 @@ import 'layouts/home/MyHomePage.dart';
 void main() {
   runApp(MyApp());
 }
+//TODO Try Calling menu API Here so It only gets called once per App Build
 
 class MyApp extends StatelessWidget {
   String restaurantName = "Corey\'s Corner";
