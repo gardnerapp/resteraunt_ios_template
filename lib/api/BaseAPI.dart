@@ -3,7 +3,7 @@ class BaseAPI{
   static var api = base + "/api/v1";
   var loginPath = api + "/login";
   var userPath = api + "/user";
-  var sectionsPath = api + "/menu";
+  var sectionsPath = api + "/sections";
   int accepted = 202;
   int unprocessed = 422;
 

@@ -14,7 +14,7 @@ class SectionItemsListView extends StatelessWidget {
         appBar: CustomAppBar(this.sectionData.title),
         body: ListView(
             padding: EdgeInsets.all(2.0),
-            children: getItemPanels(this.sectionData.items)));
+            children: <Widget>[])); //getItemPanels(this.sectionData.items)));
   }
 
   List<Widget> getItemPanels(List<dynamic> itemList) {

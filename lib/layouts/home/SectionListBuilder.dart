@@ -13,11 +13,16 @@ class SectionListBuilder extends StatelessWidget {
         future: menu.getMenuSections(),
         builder: (context, snapShot){
           if(snapShot.hasData){
-            return ListView.builder(
-              padding: EdgeInsets.all(0.0),
+            return ListView.separated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: 25,
+                  );
+                },
+              padding: EdgeInsets.all(50.0),
               itemCount: snapShot.data.length,
               itemBuilder: (context, index){
-                return MenuSectionPanel(sectionData: snapShot.data[index]);
+                return MenuSectionPanel(section: snapShot.data[index]);
               });
           } else if(snapShot.hasError || !snapShot.hasData){
             //print(snapShot.error);
