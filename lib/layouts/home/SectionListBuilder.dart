@@ -16,7 +16,7 @@ class SectionListBuilder extends StatelessWidget {
             return ListView.separated(
                 separatorBuilder: (BuildContext context, int index) {
                   return SizedBox(
-                    height: 25,
+                    height: 30.0,
                   );
                 },
               padding: EdgeInsets.all(50.0),
@@ -25,12 +25,7 @@ class SectionListBuilder extends StatelessWidget {
                 return MenuSectionPanel(section: snapShot.data[index]);
               });
           } else if(snapShot.hasError || !snapShot.hasData){
-            //print(snapShot.error);
-            return Center(child: Text("Something Went Wrong\n Please Contact"
-                "Customer Service For Help", style: TextStyle(
-              color: Colors.black,
-              fontSize: 20.0
-            ),));
+              Navigator.pushNamed(context, '/error');
           }
           return Container(height: 50.0,
               child: CircularProgressIndicator());

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:resteraunt_starter/layouts/shared/ErrorPage.dart';
 
 import 'layouts/home/MyHomePage.dart';
 
 void main() {
   runApp(MyApp());
 }
-//TODO Try Calling menu API Here so It only gets called once per App Build
 
 class MyApp extends StatelessWidget {
   String restaurantName = "Corey\'s Corner";
@@ -20,8 +20,12 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
             elevation: 16.0
         ),
-
       ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(restaurantName: restaurantName),
+        '/error': (context) => ErrorPage(),
+      },
       home: MyHomePage(restaurantName: restaurantName),
     );
   }
