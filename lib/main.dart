@@ -9,10 +9,10 @@ void main() {
 
 class MyApp extends StatelessWidget {
   String restaurantName = "Corey\'s Corner";
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: true,
       title: 'Restaurant Starter',
       theme: ThemeData(
         splashColor: Colors.white,
@@ -21,11 +21,6 @@ class MyApp extends StatelessWidget {
             elevation: 16.0
         ),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => MyHomePage(restaurantName: restaurantName),
-        '/error': (context) => ErrorPage(),
-      },
       home: MyHomePage(restaurantName: restaurantName),
     );
   }

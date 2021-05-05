@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:resteraunt_starter/api/MenuAPI.dart';
 import 'package:resteraunt_starter/components/Panel.dart';
 import 'package:resteraunt_starter/layouts/section/SectionItemsListView.dart';
+import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 import 'package:resteraunt_starter/models/menu/Section.dart';
 
 class MenuSectionPanel extends StatelessWidget {
@@ -11,7 +12,6 @@ class MenuSectionPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MenuAPI menuAPI = MenuAPI();
     return Panel(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,17 +36,9 @@ class MenuSectionPanel extends StatelessWidget {
       color: Colors.white,
       sideColor: Theme.of(context).primaryColor,
       onPressed: () {
-        try{
-          var items = menuAPI.getSectionItems(this.section.id);
-          if (items == null){
-            Navigator.pushNamed(context, '/error');
-          } else{
-            Navigator.push(context, MaterialPageRoute(builder: (context) => SectionItemsListView()));
-          }
-        } catch (e) {
-          print("${e.toString()}");
-          Navigator.pushNamed(context, '/error');
-        }
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SectionItemsListView(
+          section: this.section,
+        )));
       },
     );
   }

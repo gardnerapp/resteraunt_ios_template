@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:resteraunt_starter/api/MenuAPI.dart';
 import 'package:resteraunt_starter/layouts/home/MenuSectionPanel.dart';
+import 'package:resteraunt_starter/layouts/shared/ErrorPage.dart';
+import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 
-//todo next begin item page w contigents for description adds , sides not being present
 
 class SectionListBuilder extends StatelessWidget {
   @override
@@ -25,7 +26,7 @@ class SectionListBuilder extends StatelessWidget {
                 return MenuSectionPanel(section: snapShot.data[index]);
               });
           } else if(snapShot.hasError || !snapShot.hasData){
-              Navigator.pushNamed(context, '/error');
+            return ErrorPage();
           }
           return Container(height: 50.0,
               child: CircularProgressIndicator());

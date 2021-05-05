@@ -1,29 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:resteraunt_starter/api/MenuAPI.dart';
 import 'package:resteraunt_starter/components/CustomAppBar.dart';
 import 'package:resteraunt_starter/layouts/section/ItemPanel.dart';
-import 'package:resteraunt_starter/models/menu/Item.dart';
+import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 import 'package:resteraunt_starter/models/menu/Section.dart';
 
 class SectionItemsListView extends StatelessWidget {
   final Section section;
-  final List<Item> sectionItems;
 
-  const SectionItemsListView({Key key, this.sectionItems, this.section})
+  const SectionItemsListView({Key key, this.section})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    MenuAPI menuAPI = MenuAPI();
     return Scaffold(
         appBar: CustomAppBar(this.section.title),
-        body: ListView.separated(
-          itemCount: sectionItems.length,
-          padding: EdgeInsets.all(20.0),
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(height: 30.0);
-          },
-          itemBuilder: (context, index) {
-            return ItemPanel(item: sectionItems[index]);
-          },
+        body: Expanded(
+          child: FutureBuilder(
+              future: menuAPI.getSectionItems(this.section.id),
+              builder: (context, snapShot) {
+                if (snapShot.hasData) {
+                  return ListView.separated(
+                    itemCount: snapShot.data.length,
+                    padding: EdgeInsets.all(20.0),
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(height: 30.0);
+                    },
+                    itemBuilder: (context, index) {
+                      return ItemPanel(item: snapShot.data[index]);
+                    },
+                  );
+                } else if (snapShot.hasError || !snapShot.hasData) {
+                  pushError(context);
+                }
+                return Container(
+                    height: 50.0,
+                    child: CircularProgressIndicator.adaptive()
+                );
+              }),
         ));
   }
 }

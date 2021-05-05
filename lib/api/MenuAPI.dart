@@ -5,6 +5,7 @@ import 'package:resteraunt_starter/models/menu/Item.dart';
 import 'package:resteraunt_starter/models/menu/Section.dart';
 
 class MenuAPI extends BaseAPI {
+
   Future<List<dynamic>> getMenuSections() async {
     final response = await http.get(super.sectionsPath, headers: headers);
 
@@ -27,7 +28,7 @@ class MenuAPI extends BaseAPI {
       var items = body.map((e) => Item.fromJson(e)).toList();
       return items;
     } else {
-      return null;
+      return [];
     }
   }
 }
