@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:resteraunt_starter/api/MenuAPI.dart';
 import 'package:resteraunt_starter/components/CustomAppBar.dart';
 import 'package:resteraunt_starter/layouts/section/ItemPanel.dart';
+import 'package:resteraunt_starter/layouts/shared/ErrorPage.dart';
 import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 import 'package:resteraunt_starter/models/menu/Section.dart';
 
@@ -16,8 +17,7 @@ class SectionItemsListView extends StatelessWidget {
     MenuAPI menuAPI = MenuAPI();
     return Scaffold(
         appBar: CustomAppBar(this.section.title),
-        body: Expanded(
-          child: FutureBuilder(
+        body: FutureBuilder(
               future: menuAPI.getSectionItems(this.section.id),
               builder: (context, snapShot) {
                 if (snapShot.hasData) {
@@ -32,13 +32,14 @@ class SectionItemsListView extends StatelessWidget {
                     },
                   );
                 } else if (snapShot.hasError || !snapShot.hasData) {
-                  pushError(context);
+                  ErrorPage();
+                  print(snapShot.error);
                 }
                 return Container(
                     height: 50.0,
                     child: CircularProgressIndicator.adaptive()
                 );
               }),
-        ));
+        );
   }
 }

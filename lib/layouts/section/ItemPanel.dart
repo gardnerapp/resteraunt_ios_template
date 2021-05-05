@@ -12,13 +12,31 @@ class ItemPanel extends StatelessWidget {
     return Panel(
       color: Colors.white,
       sideColor: Theme.of(context).primaryColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          itemPanelRowChild(this.item.name),
-          itemPanelRowChild("\$${this.item.price.toString()}")
-        ],
-      ),
+      child: this.item.coverPhoto == null
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                itemPanelRowChild(this.item.name),
+                itemPanelRowChild("\$${this.item.price.toString()}")
+              ],
+            )
+          : Row(children: [
+              Expanded(
+                  child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Material(
+                    elevation: 16.0,
+                    child: Image.network(this.item.coverPhoto)),
+              )),
+              Column(
+                children: [
+                  itemPanelRowChild(this.item.name),
+                  SizedBox(height: 10.0),
+                  itemPanelRowChild("\$${this.item.price.toString()}")
+                ],
+              )
+            ]
+        ),
       onPressed: () {
         Navigator.push(
             context,
