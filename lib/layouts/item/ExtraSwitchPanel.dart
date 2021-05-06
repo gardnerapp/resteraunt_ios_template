@@ -3,8 +3,9 @@ import 'package:resteraunt_starter/models/menu/Extra.dart';
 
 class ExtraSwitchPanel extends StatefulWidget {
   final Extra extra;
+  final Function(Extra extra, bool val) modifySelectedExtras;
 
-  const ExtraSwitchPanel({Key key, this.extra}) : super(key: key);
+  const ExtraSwitchPanel({Key key, this.extra, this.modifySelectedExtras}) : super(key: key);
 
   @override
   _ExtraSwitchPanelState createState() => _ExtraSwitchPanelState();
@@ -27,14 +28,11 @@ class _ExtraSwitchPanelState extends State<ExtraSwitchPanel> {
             onChanged: (bool newVal) {
               setState(() {
                 _val = newVal;
-                addSelected(this.widget.extra, _val);
               });
+              this.widget.modifySelectedExtras(this.widget.extra, newVal);
             }),
       ),
     );
   }
 
-  addSelected(Extra extra, bool value) {
-    //implement bloc here
-  }
 }
