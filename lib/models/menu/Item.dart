@@ -1,6 +1,6 @@
 
 import 'Extra.dart';
-import 'SideCollection.dart';
+
 
 class Item {
   final int id;
@@ -8,6 +8,7 @@ class Item {
   final double price;
   String coverPhoto;
   String description;
+  List<Extra> extras;
 
   Item({
     this.id,
@@ -15,6 +16,7 @@ class Item {
     this.price,
     this.coverPhoto,
     this.description,
+    this.extras
   });
 
   factory Item.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class Item {
         id: json['id'],
         name: json['name'],
         price: json['price'],
+        extras: json['extras'],
         coverPhoto: json['image'],
         description: json['description']
     );

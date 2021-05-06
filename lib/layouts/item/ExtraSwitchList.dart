@@ -9,25 +9,20 @@ class ExtrasSwitchList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<ExtraSwitchPanel> extraPanels =
-
-    List.generate(
-        this.extras.length, (i) => ExtraSwitchPanel(extra: this.extras[i]));
-    return extras != null || extras != []
-        ? Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("Please Select Any Extra Sides"),
-                Wrap(
-                  children: [],
-                )
-              ],
-            ),
+    List<ExtraSwitchPanel> extraPanels = List.generate(
+            this.extras.length, (i) => ExtraSwitchPanel(extra: this.extras[i]))
+        .toList();
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text("Please Select Any Extra Sides"),
+          Wrap(
+            children: extraPanels,
           )
-        : SizedBox(
-            height: 0.0,
-          );
+        ],
+      ),
+    );
   }
 }
