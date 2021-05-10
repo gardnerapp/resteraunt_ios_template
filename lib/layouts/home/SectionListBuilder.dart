@@ -28,8 +28,10 @@ class SectionListBuilder extends StatelessWidget {
           } else if(snapShot.hasError || !snapShot.hasData){
             return ErrorPage();
           }
-          return Container(height: 50.0,
-              child: CircularProgressIndicator());
+          return Container(
+              height: 100.0,
+              child: Center(child: CircularProgressIndicator())
+          );
         },
       ),
     );

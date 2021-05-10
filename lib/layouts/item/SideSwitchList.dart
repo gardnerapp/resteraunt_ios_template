@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:resteraunt_starter/layouts/item/ExtraSwitchPanel.dart';
+import 'package:resteraunt_starter/layouts/item/SideSwitchPanel.dart';
 import 'package:resteraunt_starter/models/menu/Side.dart';
 
 class SidesSwitchList extends StatefulWidget {
-  final List<Side> sides;
+  final List<dynamic> sides;
   final Function(List<Side> selectedExtras) transmitSelectedSides;
 
   const SidesSwitchList({Key key, this.sides, this.transmitSelectedSides}) : super(key: key);

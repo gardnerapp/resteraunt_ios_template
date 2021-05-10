@@ -8,8 +8,6 @@ import 'package:resteraunt_starter/models/bloc/FoodEvent.dart';
 import 'package:resteraunt_starter/models/menu/Side.dart';
 import 'package:resteraunt_starter/models/menu/Item.dart';
 
-//TODO ADD PICTURE, msg if extras, make sure extra call backs work and see it bloc works
-
 class DisplayItem extends StatefulWidget {
   final Item item;
 

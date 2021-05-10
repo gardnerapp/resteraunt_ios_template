@@ -3,7 +3,7 @@ import 'package:resteraunt_starter/api/MenuAPI.dart';
 import 'package:resteraunt_starter/components/CustomAppBar.dart';
 import 'package:resteraunt_starter/layouts/section/ItemPanel.dart';
 import 'package:resteraunt_starter/layouts/shared/ErrorPage.dart';
-import 'package:resteraunt_starter/layouts/shared/helpers.dart';
+
 import 'package:resteraunt_starter/models/menu/Section.dart';
 
 class SectionItemsListView extends StatelessWidget {
@@ -36,8 +36,8 @@ class SectionItemsListView extends StatelessWidget {
                   print(snapShot.error);
                 }
                 return Container(
-                    height: 50.0,
-                    child: CircularProgressIndicator.adaptive()
+                    height: 100.0,
+                    child: Center(child: CircularProgressIndicator())
                 );
               }),
         );
