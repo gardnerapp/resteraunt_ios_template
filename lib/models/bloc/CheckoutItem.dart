@@ -1,17 +1,17 @@
-import 'package:resteraunt_starter/models/menu/Extra.dart';
+import 'package:resteraunt_starter/models/menu/Side.dart';
 
 class CheckOutItem{
 
   String name;
   double price;
   String additionalInstructions;
-  List<Extra> extras;
+  List<Side> sides;
 
-  CheckOutItem({String name, double price, String additionalInstructions, List<Extra> extras}){
+  CheckOutItem({String name, double price, String additionalInstructions, List<Side> extras}){
     this.name = name;
     this.price = price;
     this.additionalInstructions = additionalInstructions;
-    this.extras = extras;
+    this.sides = sides;
   }
 
 }

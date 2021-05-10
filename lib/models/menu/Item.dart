@@ -1,5 +1,5 @@
 
-import 'Extra.dart';
+import 'Side.dart';
 
 
 class Item {
@@ -8,7 +8,7 @@ class Item {
   final double price;
   String coverPhoto;
   String description;
-  List<Extra> extras;
+  List<Side> sides;
 
   Item({
     this.id,
@@ -16,7 +16,7 @@ class Item {
     this.price,
     this.coverPhoto,
     this.description,
-    this.extras
+    this.sides
   });
 
   factory Item.fromJson(Map<String, dynamic> json) {
@@ -24,7 +24,7 @@ class Item {
         id: json['id'],
         name: json['name'],
         price: json['price'],
-        extras: json['extras'],
+        sides: json['extras'], //TODO MAP
         coverPhoto: json['image'],
         description: json['description']
     );

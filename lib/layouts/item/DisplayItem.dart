@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resteraunt_starter/components/CustomAppBar.dart';
-import 'package:resteraunt_starter/layouts/item/ExtraSwitchList.dart';
+import 'package:resteraunt_starter/layouts/item/SideSwitchList.dart';
 import 'package:resteraunt_starter/models/bloc/CheckoutItem.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBloc.dart';
 import 'package:resteraunt_starter/models/bloc/FoodEvent.dart';
-import 'package:resteraunt_starter/models/menu/Extra.dart';
+import 'package:resteraunt_starter/models/menu/Side.dart';
 import 'package:resteraunt_starter/models/menu/Item.dart';
 
-//TODO ADD PICTURE
+//TODO ADD PICTURE, msg if extras, make sure extra call backs work and see it bloc works
 
 class DisplayItem extends StatefulWidget {
   final Item item;
@@ -21,14 +21,14 @@ class DisplayItem extends StatefulWidget {
 
 class _DisplayItemState extends State<DisplayItem> {
   String additionalInstructions;
-  List<Extra> selectedExtras;
+  List<Side> selectedSides;
 
   @override
   Widget build(BuildContext context) {
     CheckOutItem _checkOutItem = new CheckOutItem(
         name: this.widget.item.name,
         price: this.widget.item.price,
-        extras: this.selectedExtras,
+        extras: this.selectedSides,
         additionalInstructions: this.additionalInstructions);
 
     return Scaffold(
@@ -49,10 +49,10 @@ class _DisplayItemState extends State<DisplayItem> {
                   setState(() => additionalInstructions = val);
                 },
               ),
-              this.widget.item.extras != null || this.widget.item.extras != []
-                  ? ExtrasSwitchList(
-                      extras: this.widget.item.extras,
-                      transmitSelectedExtras: transmitSelectedExtras,
+              this.widget.item.sides != null || this.widget.item.sides != []
+                  ? SidesSwitchList(
+                      sides: this.widget.item.sides,
+                      transmitSelectedSides: transmitSelectedSides,
                     )
                   : SizedBox(height: 0.0),
               ElevatedButton.icon(
@@ -68,9 +68,9 @@ class _DisplayItemState extends State<DisplayItem> {
         ));
   }
 
-  void transmitSelectedExtras(List<Extra> extras) {
+  void transmitSelectedSides(List<Side> sides) {
     setState(() {
-      this.selectedExtras = extras;
+      this.selectedSides = sides;
     });
   }
 }
