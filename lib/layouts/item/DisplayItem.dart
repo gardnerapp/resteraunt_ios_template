@@ -41,14 +41,13 @@ class _DisplayItemState extends State<DisplayItem> {
                       this.widget.item.coverPhoto.isNotEmpty
                   ? Container(
                       padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 25.0),
-                      child: Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(8.0, 10.0, 8.0, 10),
-                          child: Material(
-                              elevation: 16.0,
-                              child: Image.network(this.widget.item.coverPhoto)),
-                        ),
-                      ))
+                      child:  Padding(
+                            padding: EdgeInsets.fromLTRB(8.0, 10.0, 8.0, 10),
+                            child: Material(
+                                elevation: 16.0,
+                                child: Image.network(this.widget.item.coverPhoto)),
+                          ),
+                        )
                   : SizedBox(height: 0.0),
               this.widget.item.description.isNotEmpty
                   ? Container(
@@ -72,15 +71,17 @@ class _DisplayItemState extends State<DisplayItem> {
                       ),
                     )
                   : SizedBox(height: 0.0),
-              SizedBox(height:20.0),
-              Container( margin: EdgeInsets.fromLTRB(16.0, 10.0, 16.0,16.0),
-
+              SizedBox(height: 20.0),
+              Container(
+                margin: EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 16.0),
                 child: TextFormField(
-                decoration: textInputDecoration("Additional Instructions?", context),
-                onChanged: (val) {
-                  setState(() => additionalInstructions = val);
-                },
-              ),),
+                  decoration:
+                      textInputDecoration("Additional Instructions?", context),
+                  onChanged: (val) {
+                    setState(() => additionalInstructions = val);
+                  },
+                ),
+              ),
               this.widget.item.sides != null || this.widget.item.sides != []
                   ? SidesSwitchList(
                       sides: this.widget.item.sides,
@@ -88,8 +89,15 @@ class _DisplayItemState extends State<DisplayItem> {
                     )
                   : SizedBox(height: 0.0),
               ElevatedButton.icon(
-                icon: Icon(Icons.shopping_cart_sharp),
-                label: Text("Add To Card"),
+                style: ElevatedButton.styleFrom(
+                  elevation: 12.0,
+                    primary: Colors.grey[200],
+                    onPrimary: Colors.black,
+                    minimumSize: Size(120, 100),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0))),
+                icon: Icon(Icons.shopping_cart_sharp, size: 40.0),
+                label: Text("Add To Cart", style: TextStyle(fontSize: 20.0)),
                 onPressed: () {
                   BlocProvider.of<FoodBloc>(context)
                       .add(FoodEvent.add(_checkOutItem));

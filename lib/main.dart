@@ -21,12 +21,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: true,
         title: 'Restaurant Starter',
         theme: ThemeData(
-          elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(
-                  elevation: 16.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)))),
-          splashColor: Colors.white,
+          splashColor: Colors.orange,
           primarySwatch: Colors.orange,
           appBarTheme: AppBarTheme(elevation: 16.0),
         ),

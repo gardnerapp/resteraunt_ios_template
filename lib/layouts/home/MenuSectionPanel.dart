@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:resteraunt_starter/api/MenuAPI.dart';
 import 'package:resteraunt_starter/components/Panel.dart';
 import 'package:resteraunt_starter/layouts/section/SectionItemsListView.dart';
-import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 import 'package:resteraunt_starter/models/menu/Section.dart';
 
 class MenuSectionPanel extends StatelessWidget {
@@ -17,11 +15,13 @@ class MenuSectionPanel extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-              child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child:Material(elevation: 16.0,
-                      child:  Image.network(section.image)),
-                  )),
+              child: Container(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Material(
+                  elevation: 16.0, child: Image.network(section.image)),
+            ),
+          )),
           Directionality(
               textDirection: TextDirection.ltr,
               child: Text(

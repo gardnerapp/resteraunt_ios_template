@@ -4,7 +4,7 @@ import 'package:resteraunt_starter/models/menu/Side.dart';
 
 class SidesSwitchList extends StatefulWidget {
   final List<dynamic> sides;
-  final Function(List<Side> selectedExtras) transmitSelectedSides;
+  final Function(List<Side> selectedSides) transmitSelectedSides;
 
   const SidesSwitchList({Key key, this.sides, this.transmitSelectedSides}) : super(key: key);
 
@@ -13,21 +13,25 @@ class SidesSwitchList extends StatefulWidget {
 }
 
 class _SidesSwitchListState extends State<SidesSwitchList> {
-  List<Side> selectedExtras = [];
+  List<Side> selectedSides = [];
 
   @override
   Widget build(BuildContext context) {
     List<SideSwitchPanel> sidePanels = List.generate(
         this.widget.sides.length,
         (i) => SideSwitchPanel(
-            modifySelectedSides: modifyExtras,
+            modifySelectedSides: modifySides,
             side: this.widget.sides[i])).toList();
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Please Select Any Extra Sides"),
+          Text(
+            "Please Select Any Extra Sides",
+            style: TextStyle(fontSize: 20.0),
+          ),
+          SizedBox(height: 12.0),
           Wrap(
             children: sidePanels,
           )
@@ -36,16 +40,16 @@ class _SidesSwitchListState extends State<SidesSwitchList> {
     );
   }
 
-  void modifyExtras(Side side, bool val) {
+  void modifySides(Side side, bool val) {
     setState(() {
       if (val) {
-        selectedExtras.add(side);
+        selectedSides.add(side);
       } else {
-        if (selectedExtras.contains(side)) {
-          selectedExtras.remove(side);
+        if (selectedSides.contains(side)) {
+          selectedSides.remove(side);
         }
       }
     });
-    this.widget.transmitSelectedSides(this.selectedExtras);
+    this.widget.transmitSelectedSides(this.selectedSides);
   }
 }
