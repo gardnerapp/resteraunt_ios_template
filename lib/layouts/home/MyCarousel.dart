@@ -7,7 +7,7 @@ class MyCarousel extends StatelessWidget {
     return Container(
       child: SizedBox(
         width: 375.0,
-        height: 300.0, //TODO Make Responsive with media queries
+        height: 300.0,
         child: Carousel(
           images: [
             AssetImage("lib/assets/img/unsplash1.jpg"),
