@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:resteraunt_starter/layouts/shared/ErrorPage.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBloc.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBlocObserver.dart';
 
