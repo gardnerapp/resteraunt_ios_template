@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:resteraunt_starter/api/AuthAPI.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/components/text_form_styles.dart';
+import 'package:resteraunt_starter/layouts/authentication/AuthError.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -9,6 +13,7 @@ class SignUp extends StatefulWidget {
 
 
 class _SignUpState extends State<SignUp> {
+  AuthAPI _authAPI = AuthAPI();
   final _key = GlobalKey<FormState>();
   String name;
   String email;
@@ -31,111 +36,127 @@ class _SignUpState extends State<SignUp> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text("Create Your Account", style: formTitleStyle(),),
-              Container(
-                  width: 400,
-                  child: TextFormField(
-                    decoration: textInputDecoration("Name", context),
-                    onChanged: (val){
-                      setState(() {
-                        name = val;
-                      });
-                    },
-                    validator: (val) => val.isEmpty ? "Please enter your name" : null,
-                  )
-              ),
-              Container(
-                  width: 400,
-                  child: TextFormField(
-                      decoration: textInputDecoration("Email", context),
-                      onChanged: (val){
-                        setState(() {
-                          email = val;
-                        });
-                      },
-                      validator: (val){
-                        if(val.isEmpty){
-                          return "You Forgot to enter your email";
+              Expanded(
+                  child: Text(
+                "Create Your Account",
+                style: formTitleStyle(),
+              )),
+              Expanded(
+                  child: Container(
+                      width: 400,
+                      child: TextFormField(
+                        decoration: textInputDecoration("Name", context),
+                        onChanged: (val) {
+                          setState(() {
+                            name = val;
+                          });
+                        },
+                        validator: (val) =>
+                            val.isEmpty ? "Please enter your name" : null,
+                      ))),
+              Expanded(
+                  child: Container(
+                      width: 400,
+                      child: TextFormField(
+                          decoration: textInputDecoration("Email", context),
+                          onChanged: (val) {
+                            setState(() {
+                              email = val;
+                            });
+                          },
+                          validator: (val) {
+                            if (val.isEmpty) {
+                              return "You Forgot to enter your email";
+                            } else if (!emailRegex.hasMatch(val)) {
+                              return "Your did not enter a valid email address";
+                            }
+                            return null;
+                          }))),
+              Expanded(
+                  child: Container(
+                      width: 400,
+                      child: TextFormField(
+                          decoration: textInputDecoration("Phone", context),
+                          onChanged: (val) {
+                            setState(() {
+                              phone = val;
+                            });
+                          },
+                          validator: (val) {
+                            if (val.isEmpty) {
+                              return "You Forgot to enter your email";
+                            } else if (!phoneRegex.hasMatch(val)) {
+                              return "Your did not enter a valid phone number, ommit - & ()";
+                            }
+                            return null;
+                          }))),
+              Expanded(
+                  child: Container(
+                      width: 400,
+                      child: TextFormField(
+                          obscureText: true,
+                          decoration: textInputDecoration("Password", context),
+                          onChanged: (val) {
+                            setState(() {
+                              password = val;
+                            });
+                          },
+                          validator: (val) {
+                            if (val.isEmpty) {
+                              return "You forgot to enter a password";
+                            } else if (val.length < 6) {
+                              return "Password must be 6 characters long";
+                            } else if (val == "password") {
+                              return "That's definitely not a good password choice";
+                            }
+                            return null;
+                          }))),
+              Expanded(
+                  child: Container(
+                      width: 400,
+                      child: TextFormField(
+                        obscureText: true,
+                        decoration: textInputDecoration(
+                            "Password Confirmation", context),
+                        onChanged: (val) {
+                          setState(() {
+                            passwordConfirmation = val;
+                          });
+                        },
+                        validator: (val) => val != password
+                            ? "Your Passwords Don't Match"
+                            : null,
+                      ))),
+              Expanded(
+                  child: Container(
+                      width: 400,
+                      child: customRaisedIconButton(
+                          "Sign Up !", Icons.send, context, () async {
+                        if (_key.currentState.validate()) {
+                          try {
+                            var req = await _authAPI.signUpUser(name, email,
+                                phone, password, passwordConfirmation);
+                            if (req.statusCode == 202) {
+                              print("USer Successfully created");
+                              // Push to Main Menu, store user long term and short
+                            } else {
+                              pushError(context);
+                            }
+                          } on Exception catch (e) {
+                            print(e);
+                            pushError(context);
+                          }
                         }
-                        else if(!emailRegex.hasMatch(val)){
-                          return "Your did not enter a valid email address";
-                        }
-                        return null;
-                      }
-                  )
-              ),
-              Container(
-                  width: 400,
-                  child: TextFormField(
-                      decoration: textInputDecoration("Phone", context),
-                      onChanged: (val){
-                        setState(() {
-                          phone = val;
-                        });
-                      },
-                      validator: (val){
-                        if(val.isEmpty){
-                          return "You Forgot to enter your email";
-                        }
-                        else if(!phoneRegex.hasMatch(val)){
-                          return "Your did not enter a valid phone number, ommit - & ()";
-                        }
-                        return null;
-                      }
-                  )
-              ),
-              Container(
-                  width: 400,
-                  child: TextFormField(
-                      obscureText: true,
-                      decoration: textInputDecoration("Password", context),
-                      onChanged: (val){
-                        setState(() {
-                          password = val;
-                        });
-                      },
-                      validator: (val){
-                        if(val.isEmpty){
-                          return "You forgot to enter a password";
-                        }
-                        else if (val.length < 6){
-                          return "Password must be 6 characters long";
-                        }
-                        else if (val == "password"){
-                          return "That's definitely not a good password choice";
-                        }
-                        return null;
-                      }
-                  )
-              ),
-              Container(
-                  width: 400,
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: textInputDecoration("Password Confirmation", context),
-                    onChanged: (val){
-                      setState(() {
-                        passwordConfirmation = val;
-                      });
-                    },
-                    validator: (val) => val != password ? "Your Passwords Don't Match" : null,
-                  )
-              ),
-              Container(
-                width: 400,
-                  child:  customRaisedIconButton("Sign Up !", Icons.send, context, (){})
-              )
-
+                      })))
             ],
           ),
         ));
   }
 
-/* todo same e as sgn in take hson
- void PushError(){
-    Navigator.push(context, MaterialPageRoute(
-        builder: (context) => CreateUserErrorPage()
-    ));
-  }*/
+void pushError(context){
+  Navigator.push(context, MaterialPageRoute(builder: (
+      context) =>
+      AuthError()));
+}
 
 }
