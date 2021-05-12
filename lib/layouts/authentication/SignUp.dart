@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:resteraunt_starter/layouts/authentication/AuthStyles.dart';
+import 'package:resteraunt_starter/components/RaisedIconButton.dart';
+import 'package:resteraunt_starter/components/text_form_styles.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -120,6 +121,10 @@ class _SignUpState extends State<SignUp> {
                     validator: (val) => val != password ? "Your Passwords Don't Match" : null,
                   )
               ),
+              Container(
+                width: 400,
+                  child:  customRaisedIconButton("Sign Up !", Icons.send, context, (){})
+              )
 
             ],
           ),

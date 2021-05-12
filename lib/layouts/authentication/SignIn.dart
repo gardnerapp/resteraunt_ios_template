@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/components/text_form_styles.dart';
 
 class SignIn extends StatefulWidget {
@@ -52,7 +53,10 @@ class _SignInState extends State<SignIn> {
                   },
                 ),
                 SizedBox(height: 25),
-               // Todo submit button
+                Container(
+                    width: 400,
+                    child: customRaisedIconButton("Sign In !", Icons.send, context, (){})
+                )
               ],
             )
         )

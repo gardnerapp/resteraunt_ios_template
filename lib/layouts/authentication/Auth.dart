@@ -15,7 +15,7 @@ class _AuthState extends State<Auth> {
     return Scaffold(
         appBar: AppBar(
             title: Text(
-              "Newport Marine",
+              "Corey's Corner",
             ),
             elevation: 16.0,
             leading: IconButton(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resteraunt_starter/components/CustomAppBar.dart';
+import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/components/text_form_styles.dart';
 import 'package:resteraunt_starter/layouts/item/SideSwitchList.dart';
 import 'package:resteraunt_starter/models/bloc/CheckoutItem.dart';
@@ -88,21 +89,13 @@ class _DisplayItemState extends State<DisplayItem> {
                       transmitSelectedSides: transmitSelectedSides,
                     )
                   : SizedBox(height: 0.0),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  elevation: 12.0,
-                    primary: Colors.grey[200],
-                    onPrimary: Colors.black,
-                    minimumSize: Size(120, 100),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0))),
-                icon: Icon(Icons.shopping_cart_sharp, size: 40.0),
-                label: Text("Add To Cart", style: TextStyle(fontSize: 20.0)),
-                onPressed: () {
-                  BlocProvider.of<FoodBloc>(context)
-                      .add(FoodEvent.add(_checkOutItem));
-                },
-              )
+              Container(
+                  width: 400,
+                  child: customRaisedIconButton(
+                      "Add To Cart", Icons.shopping_cart_sharp, context, () {
+                    BlocProvider.of<FoodBloc>(context)
+                        .add(FoodEvent.add(_checkOutItem));
+                  }))
             ],
           ),
         ));
