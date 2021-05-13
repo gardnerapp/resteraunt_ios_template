@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
-class User{
+import 'package:resteraunt_starter/models/prefs/prefs.dart';
+
+class User {
   int id;
   String email;
   String phone;
@@ -11,16 +12,20 @@ class User{
 
   factory User.fromReqBody(String body) {
     Map<String, dynamic> json = jsonDecode(body);
-    return User(
+
+    User user = User(
       id: json['id'],
       email: json['email'],
       name: json['name'],
       phone: json['phone'],
       token: json['token'],
     );
+
+    user.updateSharedPreferences();
+    return user;
   }
 
-  void printAttributes(){
+  void printAttributes() {
     print("id: ${this.id}\n");
     print("email: ${this.email}\n");
     print("phone: ${this.phone}\n");
@@ -30,19 +35,7 @@ class User{
 
   // update shared preferences
   void updateSharedPreferences() async {
-    saveEmailToShared();
-    saveTokenToShared();
+    Prefs().saveEmailToShared(this.email);
+    Prefs().saveTokenToShared(this.token);
   }
-
-  void saveEmailToShared() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("email", this.email);
-  }
-
-  void saveTokenToShared() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("token", this.token);
-  }
-
-
 }

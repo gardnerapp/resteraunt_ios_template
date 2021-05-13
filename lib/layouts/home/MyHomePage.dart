@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:resteraunt_starter/api/AuthAPI.dart';
 import 'package:resteraunt_starter/layouts/authentication/Auth.dart';
 import 'package:resteraunt_starter/layouts/home/MyCarousel.dart';
 import 'package:resteraunt_starter/layouts/home/SectionListBuilder.dart';
+import 'package:resteraunt_starter/models/prefs/prefs.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
 
 // TODO checkout new branch, add shared preferences, upon login update shared preferences, logout remove
@@ -18,9 +20,25 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  Prefs _prefs = Prefs();
+
   @override
-  void initState() {
-    // TODO: implement initState
+  void initState() async {
+    if (this.widget.user == null) {
+      //move try statement around to http req after testuing it like this
+      try {
+        Map<String, String> savedPrefs = _prefs.getPrefs();
+        if (savedPrefs.isNotEmpty) {
+          var req =
+              await AuthAPI().getUser(savedPrefs["email"], savedPrefs["token"]);
+          if (req.statusCode == 202) {
+            this.widget.user = User.fromReqBody(req.body);
+          }
+        }
+      } on Exception catch (e) {
+        print(e);
+      }
+    }
     super.initState();
   }
 
