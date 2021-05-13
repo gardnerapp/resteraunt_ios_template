@@ -4,16 +4,32 @@ import 'package:resteraunt_starter/layouts/home/MyCarousel.dart';
 import 'package:resteraunt_starter/layouts/home/SectionListBuilder.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
 
-class MyHomePage extends StatelessWidget {
+// TODO checkout new branch, add shared preferences, upon login update shared preferences, logout remove
+// todo if shared preferences get user
+
+class MyHomePage extends StatefulWidget {
   User user;
 
   MyHomePage({Key key, this.user}) : super(key: key);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
             title: Text("Corey\'s Corner"),
-            leading: this.user == null ? IconButton(
+            leading: this.widget.user == null ? IconButton(
                   icon: Icon(Icons.login),
                   onPressed: () {
                     Navigator.push(context,

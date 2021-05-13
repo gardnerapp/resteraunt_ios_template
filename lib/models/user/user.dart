@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:shared_preferences/shared_preferences.dart';
 class User{
   int id;
   String email;
@@ -27,4 +27,22 @@ class User{
     print("name: ${this.name}\n");
     print("token: ${this.token}\n");
   }
+
+  // update shared preferences
+  void updateSharedPreferences() async {
+    saveEmailToShared();
+    saveTokenToShared();
+  }
+
+  void saveEmailToShared() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("email", this.email);
+  }
+
+  void saveTokenToShared() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("token", this.token);
+  }
+
+
 }

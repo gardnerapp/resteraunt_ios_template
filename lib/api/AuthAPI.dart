@@ -39,6 +39,12 @@ class AuthAPI extends BaseAPI {
     return response;
   }
 
+  Future<http.Response> getUser(String email, String token) async {
+    http.Response response =
+        await http.get(super.usersPath, headers: super.headers);
+    return response;
+  }
+
 //TODO reset password
 
 }
