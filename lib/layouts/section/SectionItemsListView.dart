@@ -3,8 +3,10 @@ import 'package:resteraunt_starter/api/MenuAPI.dart';
 import 'package:resteraunt_starter/components/CustomAppBar.dart';
 import 'package:resteraunt_starter/layouts/section/ItemPanel.dart';
 import 'package:resteraunt_starter/layouts/shared/ErrorPage.dart';
-
 import 'package:resteraunt_starter/models/menu/Section.dart';
+
+// TODO checkout new branch, add shared preferences, upon login update shared preferences, logout remove
+// todo if shared preferences get user
 
 class SectionItemsListView extends StatelessWidget {
   final Section section;
