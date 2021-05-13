@@ -5,6 +5,7 @@ import 'package:resteraunt_starter/api/AuthAPI.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/components/text_form_styles.dart';
 import 'package:resteraunt_starter/layouts/authentication/AuthError.dart';
+import 'package:resteraunt_starter/layouts/home/MyHomePage.dart';
 import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
 
@@ -139,14 +140,14 @@ class _SignUpState extends State<SignUp> {
                             var req = await _authAPI.signUpUser(name, email,
                                 phone, password, passwordConfirmation);
                             if (req.statusCode == 202) {
-                              print("USer Successfully created");
                               var user = User.fromReqBody(req.body);
-                              user.printAttributes();
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(
+                                user: user,
+                              )));
                             } else {
                               pushError(context);
                             }
                           } on Exception catch (e) {
-                            print(e);
                             pushError(context);
                           }
                         }

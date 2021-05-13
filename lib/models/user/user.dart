@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 class User{
-  // todo next render user obj from json in view and begin sign in processs
   int id;
   String email;
   String phone;

@@ -11,7 +11,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  String restaurantName = "Corey\'s Corner";
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.orange,
           appBarTheme: AppBarTheme(elevation: 16.0),
         ),
-        home: MyHomePage(restaurantName: restaurantName),
+        home: MyHomePage(),
       ),
     );
   }

@@ -17,14 +17,17 @@ class _AuthState extends State<Auth> {
             title: Text(
               "Corey's Corner",
             ),
-            elevation: 16.0,
-            leading: IconButton(
+          elevation: 16.0,
+          actions: [
+            IconButton(
                 icon: Icon(Icons.swap_horiz),
                 onPressed: () {
                   setState(() {
                     showSignUp = !showSignUp;
                   });
-                })),
+                })
+          ],
+        ),
         body: Container(child: showSignUp ? SignUp() : SignIn()));
   }
 }

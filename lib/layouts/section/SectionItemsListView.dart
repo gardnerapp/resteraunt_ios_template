@@ -31,9 +31,8 @@ class SectionItemsListView extends StatelessWidget {
                       return ItemPanel(item: snapShot.data[index]);
                     },
                   );
-                } else if (snapShot.hasError || !snapShot.hasData) {
+                } else if (snapShot.hasError) {
                   ErrorPage();
-                  print(snapShot.error);
                 }
                 return Container(
                     height: 100.0,

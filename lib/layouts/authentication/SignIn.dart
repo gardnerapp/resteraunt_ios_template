@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:resteraunt_starter/api/AuthAPI.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/components/text_form_styles.dart';
+import 'package:resteraunt_starter/layouts/home/MyHomePage.dart';
 import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
 
@@ -65,13 +66,14 @@ class _SignInState extends State<SignIn> {
                         try{
                           var req= await _authAPI.createSession(email, password);
                           if(req.statusCode == 202){
-                           var user = User.fromReqBody(req.body);
-                           user.printAttributes();
+                            var user = User.fromReqBody(req.body);
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(
+                             user: user,
+                           )));
                           } else {
                             pushError(context);
                           }
                         } on Exception catch (e){
-                          print(e.toString());
                           pushError(context);
                         }
                       }

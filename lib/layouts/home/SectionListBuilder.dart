@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:resteraunt_starter/api/MenuAPI.dart';
 import 'package:resteraunt_starter/layouts/home/MenuSectionPanel.dart';
 import 'package:resteraunt_starter/layouts/shared/ErrorPage.dart';
-import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 
 
 class SectionListBuilder extends StatelessWidget {

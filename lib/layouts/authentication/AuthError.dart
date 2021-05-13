@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//TODO CONTACT CUSTOMER SERVICE CORRECT URL
+//TODO CONTACT CUSTOMER SERVICE CORRECT URL and stylize
 class AuthError extends StatelessWidget {
 
   @override
@@ -16,7 +16,7 @@ class AuthError extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(20.0),
           child: Center(
-              child: Text("\tIf this continues to be an issue please contact our customer service\n\n https://newportmarine.app/help ",
+              child: Text("\t Request couldn't be processed\n\n\t If this continues to be an issue please contact our customer service\n\nhttps://newportmarine.app/help ",
                 style: TextStyle(fontSize: 30.0), textAlign: TextAlign.center,)
           ),));
   }

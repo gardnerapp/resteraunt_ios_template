@@ -7,7 +7,7 @@ import 'package:resteraunt_starter/models/menu/Section.dart';
 class MenuAPI extends BaseAPI {
 
   Future<List<dynamic>> getMenuSections() async {
-    final response = await http.get(super.sectionsPath, headers: headers);
+    final response = await http.get(super.sectionsPath, headers: super.headers);
 
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
@@ -21,7 +21,7 @@ class MenuAPI extends BaseAPI {
   Future<List<dynamic>> getSectionItems(int sectionID) async {
     var uri = super.sectionsPath + "/$sectionID";
 
-    final response = await http.get(uri, headers: headers);
+    final response = await http.get(uri, headers: super.headers);
 
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
