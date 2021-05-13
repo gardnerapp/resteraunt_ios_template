@@ -27,8 +27,7 @@ class AuthAPI extends BaseAPI{
 
   Future<http.Response> createSession(String email, String password) async {
     var body = jsonEncode({
-      'user': {'email': email, 'password': password
-      }
+      'email': email, 'password': password
     });
 
     http.Response response =
@@ -38,6 +37,7 @@ class AuthAPI extends BaseAPI{
     print("\n STATUS CODE: ${response.statusCode}");
     return response;
   }
+
 
 //TODO Reset Password, LOGOT
 

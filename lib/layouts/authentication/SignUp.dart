@@ -5,6 +5,8 @@ import 'package:resteraunt_starter/api/AuthAPI.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/components/text_form_styles.dart';
 import 'package:resteraunt_starter/layouts/authentication/AuthError.dart';
+import 'package:resteraunt_starter/layouts/shared/helpers.dart';
+import 'package:resteraunt_starter/models/user/user.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -138,7 +140,8 @@ class _SignUpState extends State<SignUp> {
                                 phone, password, passwordConfirmation);
                             if (req.statusCode == 202) {
                               print("USer Successfully created");
-                              // Push to Main Menu, store user long term and short
+                              var user = User.fromReqBody(req.body);
+                              user.printAttributes();
                             } else {
                               pushError(context);
                             }
@@ -152,11 +155,5 @@ class _SignUpState extends State<SignUp> {
           ),
         ));
   }
-
-void pushError(context){
-  Navigator.push(context, MaterialPageRoute(builder: (
-      context) =>
-      AuthError()));
-}
 
 }

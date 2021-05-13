@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:resteraunt_starter/api/AuthAPI.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/components/text_form_styles.dart';
+import 'package:resteraunt_starter/layouts/shared/helpers.dart';
+import 'package:resteraunt_starter/models/user/user.dart';
 
 class SignIn extends StatefulWidget {
 
@@ -9,9 +14,9 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
+  AuthAPI _authAPI = AuthAPI();
   final _key =  GlobalKey<FormState>();
-  String phone;
+  String email;
   String password;
   @override
   Widget build(BuildContext context) {
@@ -29,8 +34,8 @@ class _SignInState extends State<SignIn> {
                 Container(
                     width: 400,
                     child: TextFormField(
-                      decoration: textInputDecoration("Phone", context),
-                      onChanged: (val) => setState(() => phone = val),
+                      decoration: textInputDecoration("Email", context),
+                      onChanged: (val) => setState(() => email = val),
                     )
                 ),
                 SizedBox(height: 30),
@@ -55,7 +60,22 @@ class _SignInState extends State<SignIn> {
                 SizedBox(height: 25),
                 Container(
                     width: 400,
-                    child: customRaisedIconButton("Sign In !", Icons.send, context, (){})
+                    child: customRaisedIconButton("Sign In !", Icons.send, context, () async {
+                      if(_key.currentState.validate()){
+                        try{
+                          var req= await _authAPI.createSession(email, password);
+                          if(req.statusCode == 202){
+                           var user = User.fromReqBody(req.body);
+                           user.printAttributes();
+                          } else {
+                            pushError(context);
+                          }
+                        } on Exception catch (e){
+                          print(e.toString());
+                          pushError(context);
+                        }
+                      }
+                    })
                 )
               ],
             )
