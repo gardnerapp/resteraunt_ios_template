@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBloc.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBlocObserver.dart';
+import 'package:resteraunt_starter/models/user/UserCubit.dart';
 
 import 'layouts/home/MyHomePage.dart';
 
@@ -13,8 +14,15 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => FoodBloc([]),
+    return MultiBlocProvider(
+      providers:  [
+        BlocProvider<FoodBloc>(
+          create: (BuildContext context) => FoodBloc([]),
+        ),
+        BlocProvider<UserCubit>(
+        create: (BuildContext context) => UserCubit(null)
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: true,
         title: 'Restaurant Starter',

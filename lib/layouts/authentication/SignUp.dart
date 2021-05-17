@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resteraunt_starter/api/AuthAPI.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/components/text_form_styles.dart';
 import 'package:resteraunt_starter/layouts/authentication/AuthError.dart';
 import 'package:resteraunt_starter/layouts/home/MyHomePage.dart';
 import 'package:resteraunt_starter/layouts/shared/helpers.dart';
+import 'package:resteraunt_starter/models/user/UserCubit.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
 
 class SignUp extends StatefulWidget {
@@ -142,8 +144,8 @@ class _SignUpState extends State<SignUp> {
                                 phone, password, passwordConfirmation);
                             if (req.statusCode == 202) {
                               var user = User.fromReqBody(req.body);
+                              BlocProvider.of<UserCubit>(context).login(user);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(
-                                user: user,
                               )));
                             } else {
                               pushError(context);
