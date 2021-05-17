@@ -1,34 +1,53 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Prefs {
+  int id;
+  String token;
   static SharedPreferences _prefs;
 
-  Prefs() {
-    print("pre init");
-    _init();
-  }
 
-  Future _init() async {
+  Future init() async {
     _prefs = await SharedPreferences.getInstance();
-    print("Initialized");
-    print(_prefs);
+    setProps();
   }
 
-  void saveEmailToShared(String email) async {
-    _prefs.setString("email", email);
+   setProps() {
+    bool checkId = _prefs.containsKey('id');
+    if(checkId){
+      id =  _prefs.getInt('id');
+    }
+    bool checkToken = _prefs.containsKey('token');
+    if(checkToken){
+      token = _prefs.getString("token");
+    }
   }
 
-  void saveTokenToShared(String token) async {
+
+  void clearPrefs(){
+    _prefs.remove("id");
+    _prefs.remove("token");
+  }
+
+  void savePrefs(int id, String token){
+    _prefs.setInt("id", id);
     _prefs.setString("token", token);
   }
 
-  Map<String, String> getPrefs() {
-    var map = {};
-    map["email"] = _prefs.get('email');
-    print("pref email: ${_prefs.get('email')}");
-    map["token"] = _prefs.get("token");
-    print("pref token: ${_prefs.get('token')}");
-    print("map: $map");
-    return map;
+  void displayPrefs(){
+    bool checkId = _prefs.containsKey('id');
+    if(checkId){
+      id =  _prefs.getInt('id');
+      print("ID $id");
+    } else {
+      print("ID KEY is null ");
+    }
+    bool checkToken = _prefs.containsKey('token');
+    if(checkToken){
+      token = _prefs.getString("token");
+      print("TOKEN $token");
+    }else {
+      print("TOKEN KEY is null");
+    }
   }
+
 }

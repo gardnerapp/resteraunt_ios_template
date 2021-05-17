@@ -3,17 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resteraunt_starter/components/CustomAppBar.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/components/text_form_styles.dart';
+import 'package:resteraunt_starter/layouts/authentication/Auth.dart';
 import 'package:resteraunt_starter/layouts/item/SideSwitchList.dart';
 import 'package:resteraunt_starter/models/bloc/CheckoutItem.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBloc.dart';
 import 'package:resteraunt_starter/models/bloc/FoodEvent.dart';
 import 'package:resteraunt_starter/models/menu/Side.dart';
 import 'package:resteraunt_starter/models/menu/Item.dart';
+import 'package:resteraunt_starter/models/user/user.dart';
 
 class DisplayItem extends StatefulWidget {
+  User user;
   final Item item;
 
-  const DisplayItem({Key key, this.item}) : super(key: key);
+  DisplayItem({Key key, this.item, this.user}) : super(key: key);
 
   @override
   _DisplayItemState createState() => _DisplayItemState();
@@ -30,7 +33,7 @@ class _DisplayItemState extends State<DisplayItem> {
         price: this.widget.item.price,
         extras: this.selectedSides,
         additionalInstructions: this.additionalInstructions);
-
+    this.widget.user.printAttributes();
 
     return Scaffold(
         appBar: CustomAppBar(this.widget.item.name),
@@ -93,6 +96,9 @@ class _DisplayItemState extends State<DisplayItem> {
                   width: 400,
                   child: customRaisedIconButton(
                       "Add To Cart", Icons.shopping_cart_sharp, context, () {
+                        if(this.widget.user == null){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Auth()));
+                        }
                     BlocProvider.of<FoodBloc>(context)
                         .add(FoodEvent.add(_checkOutItem));
                   }))

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:resteraunt_starter/models/prefs/prefs.dart';
 
 class User {
   int id;
@@ -13,7 +12,7 @@ class User {
   factory User.fromReqBody(String body) {
     Map<String, dynamic> json = jsonDecode(body);
 
-    User user = User(
+    return User(
       id: json['id'],
       email: json['email'],
       name: json['name'],
@@ -21,8 +20,6 @@ class User {
       token: json['token'],
     );
 
-    user.updateSharedPreferences();
-    return user;
   }
 
   void printAttributes() {
@@ -33,9 +30,4 @@ class User {
     print("token: ${this.token}\n");
   }
 
-  // update shared preferences
-  void updateSharedPreferences() async {
-    Prefs().saveEmailToShared(this.email);
-    Prefs().saveTokenToShared(this.token);
-  }
 }

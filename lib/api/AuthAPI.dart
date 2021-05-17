@@ -30,18 +30,22 @@ class AuthAPI extends BaseAPI {
     return response;
   }
 
-  //TODO test
+
   Future<http.Response> destroySession(int id, String token) async {
     var body = jsonEncode({'id': id, 'token': token});
 
     http.Response response = await http.post(super.destroySessionPath,
         headers: super.headers, body: body);
+
     return response;
   }
 
-  Future<http.Response> getUser(String email, String token) async {
-    http.Response response =
-        await http.get(super.usersPath, headers: super.headers);
+  Future<http.Response> getUser(int id, String token) async {
+    Uri uri = Uri.parse(super.usersPath + "/$id");
+
+    final query = uri.replace(queryParameters: {'token': token});
+
+    http.Response response = await http.get(query, headers: super.headers);
     return response;
   }
 

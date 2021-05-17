@@ -39,8 +39,9 @@ class _SignUpState extends State<SignUp> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Expanded(
-                  child: Text(
+              Container(
+                    margin: EdgeInsets.all(25.0),
+                      child: Text(
                 "Create Your Account",
                 style: formTitleStyle(),
               )),

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:resteraunt_starter/components/Panel.dart';
 import 'package:resteraunt_starter/layouts/section/SectionItemsListView.dart';
 import 'package:resteraunt_starter/models/menu/Section.dart';
+import 'package:resteraunt_starter/models/user/user.dart';
 
 class MenuSectionPanel extends StatelessWidget {
+  User user;
   final Section section;
 
-  const MenuSectionPanel({Key key, this.section}) : super(key: key);
+  MenuSectionPanel({Key key, this.section, this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class MenuSectionPanel extends StatelessWidget {
       sideColor: Theme.of(context).primaryColor,
       onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => SectionItemsListView(
+          user: this.user,
           section: this.section,
         )));
       },

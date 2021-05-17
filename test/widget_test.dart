@@ -28,3 +28,9 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 }
+
+//IF shared preferences there is user, correspnding layout changes with user
+// No user click order shared preferences
+//set user manually as if api calls were happening
+
+

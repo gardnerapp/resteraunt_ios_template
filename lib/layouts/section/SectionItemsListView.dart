@@ -4,17 +4,20 @@ import 'package:resteraunt_starter/components/CustomAppBar.dart';
 import 'package:resteraunt_starter/layouts/section/ItemPanel.dart';
 import 'package:resteraunt_starter/layouts/shared/ErrorPage.dart';
 import 'package:resteraunt_starter/models/menu/Section.dart';
+import 'package:resteraunt_starter/models/user/user.dart';
 
 
 
 class SectionItemsListView extends StatelessWidget {
+  User user;
   final Section section;
 
-  const SectionItemsListView({Key key, this.section})
+  SectionItemsListView({Key key, this.section, this.user})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    user.printAttributes();
     MenuAPI menuAPI = MenuAPI();
     return Scaffold(
         appBar: CustomAppBar(this.section.title),
@@ -29,7 +32,7 @@ class SectionItemsListView extends StatelessWidget {
                       return SizedBox(height: 30.0);
                     },
                     itemBuilder: (context, index) {
-                      return ItemPanel(item: snapShot.data[index]);
+                      return ItemPanel(user: this.user, item: snapShot.data[index]);
                     },
                   );
                 } else if (snapShot.hasError) {
