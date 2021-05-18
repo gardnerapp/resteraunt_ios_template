@@ -9,42 +9,24 @@ import 'package:resteraunt_starter/models/prefs/prefs.dart';
 import 'package:resteraunt_starter/models/user/UserCubit.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
 
-// create bloc to store user
 
-class MyHomePage extends StatefulWidget {
+// User opens app -> checks saved preferences
+// if saved get user, cubit added else normal
 
+//user logins in prefs save, cubit added
+
+// user logs out, cubit removed, faved prefs removed
+
+
+class MyHomePage extends StatelessWidget {
   const MyHomePage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  Prefs _prefs = Prefs();
-  AuthAPI _authAPI = AuthAPI();
-
-/*  checkPrefsForUser() async {
-    // do saved preferences have authentication properties
-      if(_prefs.token != null && _prefs.id != null){ // if so get user  else no user
-        try{
-          var req =
-          await _authAPI.getUser(_prefs.id, _prefs.token);
-          if (req.statusCode == 202) {
-            setState(() {
-              this.widget.user = User.fromReqBody(req.body);
-            });}
-        } on Exception catch (e) {
-          print(e);
-        }
-
-      }
-  }*/
-
-  @override
   Widget build(BuildContext context) {
+    Prefs _prefs = Prefs();
+    AuthAPI _authAPI = AuthAPI();
     _prefs.init();
-    // check if there is a user
-/*    if(this.widget.user != null){ //user has authentication properties
+    /*    if(this.widget.user != null){ //user has authentication properties
       if(this.widget.user.id != null && this.widget.user.token != null){
         // save auth to prefrences
         _prefs.savePrefs(this.widget.user.id, this.widget.user.token);
@@ -54,7 +36,6 @@ class _MyHomePageState extends State<MyHomePage> {
       _prefs.displayPrefs();
       checkPrefsForUser();
     }*/
-
     return BlocBuilder<UserCubit, User>(builder: (context, state){
       return Scaffold(
           appBar: AppBar(
@@ -100,8 +81,22 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ));
     });
-
-
-
   }
+/*  checkPrefsForUser() async {
+    // do saved preferences have authentication properties
+      if(_prefs.token != null && _prefs.id != null){ // if so get user  else no user
+        try{
+          var req =
+          await _authAPI.getUser(_prefs.id, _prefs.token);
+          if (req.statusCode == 202) {
+            setState(() {
+              this.widget.user = User.fromReqBody(req.body);
+            });}
+        } on Exception catch (e) {
+          print(e);
+        }
+
+      }
+  }*/
 }
+

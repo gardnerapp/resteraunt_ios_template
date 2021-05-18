@@ -9,15 +9,13 @@ import 'package:resteraunt_starter/models/user/user.dart';
 
 
 class SectionItemsListView extends StatelessWidget {
-  User user;
   final Section section;
 
-  SectionItemsListView({Key key, this.section, this.user})
+  SectionItemsListView({Key key, this.section})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    user.printAttributes();
     MenuAPI menuAPI = MenuAPI();
     return Scaffold(
         appBar: CustomAppBar(this.section.title),
@@ -32,7 +30,7 @@ class SectionItemsListView extends StatelessWidget {
                       return SizedBox(height: 30.0);
                     },
                     itemBuilder: (context, index) {
-                      return ItemPanel(user: this.user, item: snapShot.data[index]);
+                      return ItemPanel(item: snapShot.data[index]);
                     },
                   );
                 } else if (snapShot.hasError) {

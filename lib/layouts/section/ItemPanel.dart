@@ -5,13 +5,11 @@ import 'package:resteraunt_starter/models/menu/Item.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
 
 class ItemPanel extends StatelessWidget {
-  User user;
   final Item item;
 
-  ItemPanel({Key key, this.item, this.user}) : super(key: key);
+  ItemPanel({Key key, this.item}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    user.printAttributes();
     return Panel(
       color: Colors.white,
       sideColor: Theme.of(context).primaryColor,
@@ -44,7 +42,7 @@ class ItemPanel extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DisplayItem(user: this.user, item: this.item)));
+                builder: (context) => DisplayItem( item: this.item)));
       },
     );
   }
