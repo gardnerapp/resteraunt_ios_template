@@ -29,7 +29,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           splashColor: Colors.orange,
           primarySwatch: Colors.orange,
-          appBarTheme: AppBarTheme(elevation: 16.0),
+          appBarTheme: AppBarTheme(elevation: 16.0,
+          centerTitle: true
+          ),
         ),
         home: MyHomePage(),
       ),

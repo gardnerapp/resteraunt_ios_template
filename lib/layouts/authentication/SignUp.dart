@@ -8,8 +8,10 @@ import 'package:resteraunt_starter/components/text_form_styles.dart';
 import 'package:resteraunt_starter/layouts/authentication/AuthError.dart';
 import 'package:resteraunt_starter/layouts/home/MyHomePage.dart';
 import 'package:resteraunt_starter/layouts/shared/helpers.dart';
+import 'package:resteraunt_starter/models/prefs/prefs.dart';
 import 'package:resteraunt_starter/models/user/UserCubit.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -145,6 +147,7 @@ class _SignUpState extends State<SignUp> {
                             if (req.statusCode == 202) {
                               var user = User.fromReqBody(req.body);
                               BlocProvider.of<UserCubit>(context).login(user);
+                              upDateSharedPreferences(user.token, user.id);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(
                               )));
                             } else {
