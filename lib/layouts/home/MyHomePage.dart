@@ -88,7 +88,7 @@ class MyHomePage extends StatelessWidget {
           body: Column(
             children: [
               MyCarousel(),
-          //    SectionListBuilder(),
+             SectionListBuilder(),
             ],
           ));
     });
