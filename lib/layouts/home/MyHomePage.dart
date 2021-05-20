@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resteraunt_starter/api/AuthAPI.dart';
+import 'package:resteraunt_starter/cart/Cart.dart';
 import 'package:resteraunt_starter/layouts/authentication/Auth.dart';
 import 'package:resteraunt_starter/layouts/home/MyCarousel.dart';
 import 'package:resteraunt_starter/layouts/home/SectionListBuilder.dart';
@@ -62,7 +63,9 @@ class MyHomePage extends StatelessWidget {
               },
             ) : null,
             actions: [
-              IconButton(icon: Icon(Icons.shopping_cart_sharp), onPressed: () {}),
+              IconButton(icon: Icon(Icons.shopping_cart_sharp), onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Cart()));
+              }),
                state != null ?
               IconButton(
                   icon: Icon(Icons.exit_to_app),
