@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resteraunt_starter/api/OrderAPI.dart';
 import 'package:resteraunt_starter/cart/CartItemsList.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/layouts/authentication/Auth.dart';
+import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 import 'package:resteraunt_starter/models/bloc/CheckoutItem.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBloc.dart';
 import 'package:resteraunt_starter/models/user/UserCubit.dart';
@@ -21,7 +23,7 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
-
+    OrderAPI _orderAPI = OrderAPI();
     return Scaffold(
       appBar: AppBar(
         title: Text("Checkout"),
@@ -49,22 +51,43 @@ class _CartState extends State<Cart> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CartItemList(foodList: foodList,),
-                    SizedBox(height: 30.0),
-                    customRaisedIconButton(
+                  SizedBox(height: 30.0),
+                  customRaisedIconButton(
                       "Place Your Order", Icons.shopping_cart_sharp, context,
-                      () {
+                      () async {
+                    // Do We have a User
                     if (state == null) {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Auth()));
                       return null;
-                    } if(foodList == null || foodList.isEmpty){
-                      return null;
+                      // Are there Items in our Cart
                     }
+                    if (foodList == null || foodList.isEmpty) {
+                      return null;
+                    } else {
+                      try {
+                        var apiFoodList =
+                            foodList.map((e) => e.toJson()).toList();
+                        var total;
+                        print(total);
+                        apiFoodList.forEach((element) {
+                          total += element['total'];
+                        });
+                        print(total);
 
+                        var req = await _orderAPI.createOrder(
+                            state.id, state.token, total, apiFoodList);
+                        if (req.statusCode == 202) {
+                          // push thankyou
+                        } else {
+                          pushError(context);
+                        }
+                      } on Exception catch (e) {}
+                    }
                   }),
-                    SizedBox(height: 30.0)
-                  ],
-                );
+                  SizedBox(height: 30.0)
+                ],
+              );
             },
           );
         },
@@ -72,4 +95,3 @@ class _CartState extends State<Cart> {
     );
   }
 }
-

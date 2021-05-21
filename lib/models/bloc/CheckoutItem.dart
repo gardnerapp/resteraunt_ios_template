@@ -27,4 +27,13 @@ class CheckOutItem{
       return this.price + sidesTotal();
   }
 
+  Map<String, dynamic> toJson(){
+    var json = {
+      'name': name,
+      'total': sidesAndPriceTotal(),
+      'sides': this.sides.map((side) => side.toJson()).toList()
+    };
+    return json;
+  }
+
 }

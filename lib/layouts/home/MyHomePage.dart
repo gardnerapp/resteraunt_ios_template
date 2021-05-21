@@ -41,10 +41,7 @@ class MyHomePage extends StatelessWidget {
                 BlocProvider.of<UserCubit>(context).login(user);
                 upDateSharedPreferences(user.token, user.id);
               }
-            }on Exception catch (e){
-
-            }
-
+            }on Exception catch (e){}
           }
         }
         if(state == null){

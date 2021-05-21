@@ -9,4 +9,11 @@ class Side {
   factory Side.fromJson(Map<String, dynamic> json) {
     return Side(json['name'], json['price']);
   }
+
+  Map<String,dynamic> toJson(){
+    return {
+      'name': name,
+      'price': price
+    };
+  }
 }
