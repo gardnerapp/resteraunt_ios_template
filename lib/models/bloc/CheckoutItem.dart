@@ -14,4 +14,14 @@ class CheckOutItem{
     this.sides = sides;
   }
 
+
+  double getTotal(){
+   var total = this.price;
+    if(this.sides != null){
+
+      sides.forEach((element) {total += element.price; });
+    }
+    return total;
+  }
+
 }

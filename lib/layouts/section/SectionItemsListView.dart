@@ -18,7 +18,7 @@ class SectionItemsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     MenuAPI menuAPI = MenuAPI();
     return Scaffold(
-        appBar: CustomAppBar(this.section.title),
+        appBar: CustomAppBar(this.section.title, context),
         body: FutureBuilder(
               future: menuAPI.getSectionItems(this.section.id),
               builder: (context, snapShot) {

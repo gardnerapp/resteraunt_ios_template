@@ -7,22 +7,23 @@ import 'package:resteraunt_starter/models/bloc/FoodEvent.dart';
 class CartITem extends StatelessWidget {
   final CheckOutItem item;
   const CartITem({Key key, this.item}) : super(key: key);
-
+// sides are not going into item
   @override
   Widget build(BuildContext context) {
-    var total = 0.0;
-    var sidesTotal = this.item.sides.map((e) => e.price + total);
-    return Card(
-        elevation: 16.0,
-        child: ListTile(
-          title: Text("${item.name}"),
-          subtitle: Text("Item: \$22.0 Sides: \$$sidesTotal"),
-          leading: IconButton(
-              icon: Icon(Icons.remove_circle_rounded, color: Colors.red),
-              onPressed: () {
-                BlocProvider.of<FoodBloc>(context).add(FoodEvent.delete(this.item));
+    print(this.item.sides);
+      return Card(
+          elevation: 16.0,
+          child: ListTile(
+            title: Text("${this.item.name}"),
+            subtitle: Text("\$${item.price}\nSides: \$3.0\ntotal: 23.0"),
+            leading: IconButton(
+                icon: Icon(Icons.remove_circle_rounded, color: Colors.red),
+                splashColor: Colors.red,
+                onPressed: () {
+                  BlocProvider.of<FoodBloc>(context).add(FoodEvent.delete(this.item));
 
-              }),
-        ));
+                }),
+          ));
+    }
   }
-}
+

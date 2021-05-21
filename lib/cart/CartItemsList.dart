@@ -4,6 +4,8 @@ import 'package:resteraunt_starter/models/bloc/CheckoutItem.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+//item price shpuld be equal to the sides selected
+
 class CartItemList extends StatefulWidget {
   const CartItemList({Key key}) : super(key: key);
 
@@ -27,10 +29,7 @@ class _CartItemListState extends State<CartItemList> {
       }
       return false;
     }, builder: (context, foodlist) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+      return Container(child:
           Expanded(
             child:
               ListView.separated(
@@ -43,7 +42,6 @@ class _CartItemListState extends State<CartItemList> {
               itemCount: foodlist.length,
             ),
           ),
-        ]
       );
     });
   }

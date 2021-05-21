@@ -34,7 +34,7 @@ class _DisplayItemState extends State<DisplayItem> {
         additionalInstructions: this.additionalInstructions);
 
     return Scaffold(
-        appBar: CustomAppBar(this.widget.item.name),
+        appBar: CustomAppBar(this.widget.item.name, context),
         body: Container(
           child: ListView(
             padding: EdgeInsets.all(10.0),
