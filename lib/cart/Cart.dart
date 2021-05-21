@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resteraunt_starter/cart/CartItemsList.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
+import 'package:resteraunt_starter/layouts/authentication/Auth.dart';
+import 'package:resteraunt_starter/models/bloc/CheckoutItem.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBloc.dart';
 import 'package:resteraunt_starter/models/user/UserCubit.dart';
+import 'package:resteraunt_starter/models/user/user.dart';
 
 
 
@@ -22,22 +26,50 @@ class _CartState extends State<Cart> {
       appBar: AppBar(
         title: Text("Checkout"),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CartItemList(),
-          SizedBox(height: 30.0),
-          customRaisedIconButton(
-            //TODO Acess Bloc & Cubit Data with the least amount of code
-              "Place Your Order", Icons.shopping_cart_sharp, context, () {
-            //route to Auth if user not logged in
+      body: BlocConsumer<FoodBloc, List<CheckOutItem>>(
+          listener: (context, state) {
+            // TOOD WTF do I do here
+          },
+        listenWhen: (List<CheckOutItem> previous, List<CheckOutItem> current) {
+          if (current.length != previous.length) {
+            return true;
+          }
+          return false;
+        },
+        buildWhen: (List<CheckOutItem> previous, List<CheckOutItem> current) {
+          return true;
+        },
+        builder: (BuildContext context, List<CheckOutItem> foodList) {
+          return BlocBuilder<UserCubit, User>(
+            buildWhen: (previous, current) => previous != current,
+            builder: (BuildContext context, User state) {
+              return
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CartItemList(foodList: foodList,),
+                    SizedBox(height: 30.0),
+                    customRaisedIconButton(
+                      "Place Your Order", Icons.shopping_cart_sharp, context,
+                      () {
+                    if (state == null) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Auth()));
+                      return null;
+                    } if(foodList == null || foodList.isEmpty){
+                      return null;
+                    }
 
-            //make purchases if items in cart else do nothing
-          }),
-          SizedBox(height: 30.0)
-        ],
+                  }),
+                    SizedBox(height: 30.0)
+                  ],
+                );
+            },
+          );
+        },
       ),
     );
   }
 }
+
