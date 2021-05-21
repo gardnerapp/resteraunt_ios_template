@@ -23,16 +23,15 @@ class DisplayItem extends StatefulWidget {
 
 class _DisplayItemState extends State<DisplayItem> {
   String additionalInstructions;
-  List<Side> selectedSides;
+  List<Side> selectedSides = [];
 
   @override
   Widget build(BuildContext context) {
     CheckOutItem _checkOutItem = new CheckOutItem(
         name: this.widget.item.name,
         price: this.widget.item.price,
-        extras: this.selectedSides,
+        sides: this.selectedSides,
         additionalInstructions: this.additionalInstructions);
-
     return Scaffold(
         appBar: CustomAppBar(this.widget.item.name, context),
         body: Container(
@@ -106,5 +105,6 @@ class _DisplayItemState extends State<DisplayItem> {
     setState(() {
       this.selectedSides = sides;
     });
+    print(this.selectedSides);
   }
 }

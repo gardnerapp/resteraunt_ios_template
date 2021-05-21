@@ -10,12 +10,12 @@ class CartITem extends StatelessWidget {
 // sides are not going into item
   @override
   Widget build(BuildContext context) {
-    print(this.item.sides);
+    var sidesTotal = this.item.sidesTotal();
       return Card(
           elevation: 16.0,
           child: ListTile(
             title: Text("${this.item.name}"),
-            subtitle: Text("\$${item.price}\nSides: \$3.0\ntotal: 23.0"),
+            subtitle: Text("\$${item.price}\nSides: \$$sidesTotal\ntotal: \$${this.item.sidesAndPriceTotal()}"),
             leading: IconButton(
                 icon: Icon(Icons.remove_circle_rounded, color: Colors.red),
                 splashColor: Colors.red,
