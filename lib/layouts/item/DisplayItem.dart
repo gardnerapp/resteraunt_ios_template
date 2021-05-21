@@ -95,6 +95,7 @@ class _DisplayItemState extends State<DisplayItem> {
                       "Add To Cart", Icons.shopping_cart_sharp, context, () {
                     BlocProvider.of<FoodBloc>(context)
                         .add(FoodEvent.add(_checkOutItem));
+                    Navigator.pop(context);
                   }))
             ],
           ),
