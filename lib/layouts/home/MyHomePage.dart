@@ -11,7 +11,6 @@ import 'package:resteraunt_starter/models/user/UserCubit.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 // User opens app -> checks saved preferences
 // if saved get user, cubit added else normal
 

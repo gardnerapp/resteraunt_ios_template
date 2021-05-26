@@ -43,4 +43,5 @@ class SectionItemsListView extends StatelessWidget {
               }),
         );
   }
+
 }

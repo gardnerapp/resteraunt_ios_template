@@ -96,6 +96,12 @@ class _DisplayItemState extends State<DisplayItem> {
                     BlocProvider.of<FoodBloc>(context)
                         .add(FoodEvent.add(_checkOutItem));
                     Navigator.pop(context);
+
+                    final snackBar = SnackBar(
+                      elevation: 16.0,
+                      content: Text('Item Added To Cart'),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   }))
             ],
           ),
