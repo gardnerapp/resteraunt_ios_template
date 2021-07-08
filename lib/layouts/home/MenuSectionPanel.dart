@@ -4,6 +4,7 @@ import 'package:resteraunt_starter/layouts/section/SectionItemsListView.dart';
 import 'package:resteraunt_starter/models/menu/Section.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
 
+
 class MenuSectionPanel extends StatelessWidget {
   final Section section;
 

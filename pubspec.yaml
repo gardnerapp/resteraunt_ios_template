@@ -32,6 +32,8 @@ dependencies:
   http: ^0.12.1
   flutter_bloc: ^6.0.1
   shared_preferences: ^2.0.5
+  flutter_stripe: ^1.1.0
+  flutter_secure_storage: ^4.0.0
 
 dev_dependencies:
   flutter_test:

@@ -5,11 +5,11 @@ class UserCubit extends Cubit<User>{
   UserCubit(User state) : super(state);
 
 
-  login(User user){
-    emit(user);
-  }
+  login(User user) => emit(user);
 
-  logout(){
-    emit(null);
-  }
+
+  logout() => emit(null);
+
+  user () => state;
+
 }

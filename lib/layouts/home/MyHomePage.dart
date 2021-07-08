@@ -5,6 +5,7 @@ import 'package:resteraunt_starter/cart/Cart.dart';
 import 'package:resteraunt_starter/layouts/authentication/Auth.dart';
 import 'package:resteraunt_starter/layouts/home/MyCarousel.dart';
 import 'package:resteraunt_starter/layouts/home/SectionListBuilder.dart';
+import 'package:resteraunt_starter/layouts/home/home_drawer.dart';
 import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 import 'package:resteraunt_starter/models/prefs/prefs.dart';
 import 'package:resteraunt_starter/models/user/UserCubit.dart';
@@ -91,7 +92,9 @@ class MyHomePage extends StatelessWidget {
               MyCarousel(),
              SectionListBuilder(),
             ],
-          ));
+          ),
+      drawer: HomeDrawer(),
+      );
     });
   }
 }
