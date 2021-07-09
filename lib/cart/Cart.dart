@@ -10,12 +10,12 @@ import 'package:resteraunt_starter/models/bloc/FoodBloc.dart';
 import 'package:resteraunt_starter/models/user/UserCubit.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
 
-
+//TODO get total from fooditems, calculate sales taxes & make dynamic ie. if user not logged in don't show confirm order
 
 class Cart extends StatefulWidget {
   const Cart({Key key}) : super(key: key);
 
-// might need to wrap this in a bloc consumer an dynamically eneder based on state of the bloc
+
   @override
   _CartState createState() => _CartState();
 }
@@ -30,7 +30,7 @@ class _CartState extends State<Cart> {
       ),
       body: BlocConsumer<FoodBloc, List<CheckOutItem>>(
           listener: (context, state) {
-            // TOOD WTF do I do here
+
           },
         listenWhen: (List<CheckOutItem> previous, List<CheckOutItem> current) {
           if (current.length != previous.length) {
@@ -50,8 +50,17 @@ class _CartState extends State<Cart> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CartItemList(foodList: foodList,),
-                  SizedBox(height: 30.0),
+                    SizedBox(height: 30.0),
+                    Text("Confirm Order:",
+                        style: TextStyle(
+                            fontSize: 22.0,
+                            decoration: TextDecoration.underline)),SizedBox(height: 10.0),
+                    Text("Corey Gardner\n401-536-4647",
+                        style: TextStyle(fontSize: 22.0)),SizedBox(height: 10.0),
+                    Text("Total:\t \$35.00", style: TextStyle(fontSize: 22.0)),SizedBox(height: 30.0),
+                    CartItemList(
+                    foodList: foodList,
+                  ),
                   customRaisedIconButton(
                       "Place Your Order", Icons.shopping_cart_sharp, context,
                       () async {
@@ -69,12 +78,10 @@ class _CartState extends State<Cart> {
                         var apiFoodList =
                             foodList.map((e) => e.toJson()).toList();
                         var total;
-                        print(total);
                         apiFoodList.forEach((element) {
                           total += element['total'];
                         });
-                        print(total);
-
+                        print(total.runtimeType);
                         var req = await _orderAPI.createOrder(
                             state.id, state.token, total, apiFoodList);
                         if (req.statusCode == 202) {

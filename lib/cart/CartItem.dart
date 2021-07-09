@@ -14,8 +14,9 @@ class CartITem extends StatelessWidget {
       return Card(
           elevation: 16.0,
           child: ListTile(
-            title: Text("${this.item.name}"),
-            subtitle: Text("\$${item.price}\nSides: \$$sidesTotal\ntotal: \$${this.item.sidesAndPriceTotal()}"),
+            title: Text("${this.item.name}", style: TextStyle(fontSize: 22.0)),
+            subtitle: Text("\$${item.price}\nSides: \$$sidesTotal\ntotal: \$${this.item.sidesAndPriceTotal()}",
+                style: TextStyle(fontSize: 20.0)),
             leading: IconButton(
                 icon: Icon(Icons.remove_circle_rounded, color: Colors.red),
                 splashColor: Colors.red,

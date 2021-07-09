@@ -6,21 +6,21 @@ class FoodBlocObserver extends BlocObserver{
   void onEvent(Bloc bloc, Object event) {
     // TODO: implement onEvent
     super.onEvent(bloc, event);
-    print(event);
+    //print(event);
   }
 
   @override
   void onChange(Cubit cubit, Change change) {
     // TODO: implement onChange
     super.onChange(cubit, change);
-    print(change);
+    // print(change);
   }
 
   @override
   void onError(Cubit cubit, Object error, StackTrace stackTrace) {
     // TODO: implement onError
     super.onError(cubit, error, stackTrace);
-    print(error);
+   //  print(error);
   }
 
 }
