@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:resteraunt_starter/layouts/settings/AddCard.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBloc.dart';
 import 'package:resteraunt_starter/models/bloc/FoodBlocObserver.dart';
 import 'package:resteraunt_starter/models/user/UserCubit.dart';
+import 'package:resteraunt_starter/stripe/cards/CardForm.dart';
 //import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 
@@ -12,6 +13,7 @@ import 'layouts/home/MyHomePage.dart';
 
 void main() {
   Bloc.observer = FoodBlocObserver();
+  Stripe.publishableKey = 'pk_test_51IxaNJCcwyYrj32C13AAUnqSBKhE7aIeyyAv9xzIuF0fJCGCigoTYyYDs8HLeTWWELH0z3FWZBRiCVm7vBLMmBGP00vNmk3WEF';
   runApp(MyApp());
 }
 
@@ -55,7 +57,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         routes: {
-          '/add_card': (context) => AddCard(),
+          '/add_card': (context) => CardForm(),
         },
         home: MyHomePage(),
       ),

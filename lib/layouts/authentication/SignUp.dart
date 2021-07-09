@@ -11,6 +11,7 @@ import 'package:resteraunt_starter/layouts/shared/helpers.dart';
 import 'package:resteraunt_starter/models/prefs/prefs.dart';
 import 'package:resteraunt_starter/models/user/UserCubit.dart';
 import 'package:resteraunt_starter/models/user/user.dart';
+import 'package:resteraunt_starter/stripe/cards/CardForm.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
@@ -148,8 +149,10 @@ class _SignUpState extends State<SignUp> {
                               var user = User.fromReqBody(req.body);
                               BlocProvider.of<UserCubit>(context).login(user);
                               upDateSharedPreferences(user.token, user.id);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(
-                              )));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CardForm()));
                             } else {
                               pushError(context);
                             }
