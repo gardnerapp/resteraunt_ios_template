@@ -31,14 +31,12 @@ class _CardFormState extends State<CardForm> {
           ],
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 400,
-              height: 400,
-              child: CardField(
+            CardField(
                 onCardChanged: (card) {},
-              ),
             ),
+                SizedBox(height: 40),
                 Container(
                     width: 400,
                     child: customRaisedIconButton(

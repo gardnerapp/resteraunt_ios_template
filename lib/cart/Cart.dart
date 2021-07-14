@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resteraunt_starter/api/OrderAPI.dart';
 import 'package:resteraunt_starter/cart/CartItemsList.dart';
+import 'package:resteraunt_starter/cart/OrderDetails.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/layouts/authentication/Auth.dart';
 import 'package:resteraunt_starter/layouts/shared/helpers.dart';
@@ -44,28 +45,30 @@ class _CartState extends State<Cart> {
         builder: (BuildContext context, List<CheckOutItem> foodList) {
           return BlocBuilder<UserCubit, User>(
             buildWhen: (previous, current) => previous != current,
-            builder: (BuildContext context, User state) {
-              return
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 30.0),
-                    Text("Confirm Order:",
-                        style: TextStyle(
-                            fontSize: 22.0,
-                            decoration: TextDecoration.underline)),SizedBox(height: 10.0),
-                    Text("Corey Gardner\n401-536-4647",
-                        style: TextStyle(fontSize: 22.0)),SizedBox(height: 10.0),
-                    Text("Total:\t \$35.00", style: TextStyle(fontSize: 22.0)),SizedBox(height: 30.0),
-                    CartItemList(
-                    foodList: foodList,
-                  ),
+            builder: (BuildContext context, User user) {
+              var apiFoodList = foodList.map((e) => e.toJson()).toList();
+              var total = 0.0;
+              apiFoodList.forEach((element) {
+                total += element['total'];
+              });
+              var itemCount = apiFoodList.length;
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 30.0),
+                  user != null && total != 0
+                      ? OrderDetails(
+                          total: total, user: user, itemCount: itemCount)
+                      : SizedBox(height: 0.0),
+                 CartItemList(
+                      foodList: foodList,
+                    ),
                   customRaisedIconButton(
                       "Place Your Order", Icons.shopping_cart_sharp, context,
                       () async {
                     // Do We have a User
-                    if (state == null) {
+                    if (user == null) {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Auth()));
                       return null;
@@ -75,15 +78,8 @@ class _CartState extends State<Cart> {
                       return null;
                     } else {
                       try {
-                        var apiFoodList =
-                            foodList.map((e) => e.toJson()).toList();
-                        var total;
-                        apiFoodList.forEach((element) {
-                          total += element['total'];
-                        });
-                        print(total.runtimeType);
                         var req = await _orderAPI.createOrder(
-                            state.id, state.token, total, apiFoodList);
+                            user.id, user.token, total, apiFoodList);
                         if (req.statusCode == 202) {
                           // push thankyou
                         } else {

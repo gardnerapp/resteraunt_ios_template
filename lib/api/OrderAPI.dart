@@ -5,15 +5,15 @@ import 'package:http/http.dart' as http;
 
 class OrderAPI extends BaseAPI {
   Future<http.Response> createOrder(
-      int userId, String token, int total, List<Map<String, dynamic>> items) {
+      int userId, String token, double total, List<Map<String, dynamic>> items) {
     // convert to cents for stripe
-    int amount = total * 100;
+    double amount = total * 100;
 
     var body = jsonEncode({
+      'id': userId,
+      'token': token,
       'order': {
-        'user_id': userId,
-        'token': token,
-        'total': amount,
+        'amount': amount.toInt(),
         'items': items,
       }
     });

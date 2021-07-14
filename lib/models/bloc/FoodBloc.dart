@@ -25,4 +25,5 @@ class FoodBloc extends Bloc<FoodEvent, List<CheckOutItem>> {
        throw Exception("Event Not Found: $event");
    }
   }
+
 }
