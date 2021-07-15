@@ -32,6 +32,7 @@ class _CardFormState extends State<CardForm> {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CardField(
                 onCardChanged: (card) {},

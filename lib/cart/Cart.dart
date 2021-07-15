@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resteraunt_starter/api/OrderAPI.dart';
 import 'package:resteraunt_starter/cart/CartItemsList.dart';
 import 'package:resteraunt_starter/cart/OrderDetails.dart';
+import 'package:resteraunt_starter/cart/thank_you.dart';
 import 'package:resteraunt_starter/components/RaisedIconButton.dart';
 import 'package:resteraunt_starter/layouts/authentication/Auth.dart';
 import 'package:resteraunt_starter/layouts/shared/helpers.dart';
@@ -30,9 +31,7 @@ class _CartState extends State<Cart> {
         title: Text("Checkout"),
       ),
       body: BlocConsumer<FoodBloc, List<CheckOutItem>>(
-          listener: (context, state) {
-
-          },
+          listener: (context, state) {},
         listenWhen: (List<CheckOutItem> previous, List<CheckOutItem> current) {
           if (current.length != previous.length) {
             return true;
@@ -81,7 +80,10 @@ class _CartState extends State<Cart> {
                         var req = await _orderAPI.createOrder(
                             user.id, user.token, total, apiFoodList);
                         if (req.statusCode == 202) {
-                          // push thankyou
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ThankYou()));
                         } else {
                           pushError(context);
                         }

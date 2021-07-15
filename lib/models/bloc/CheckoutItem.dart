@@ -31,7 +31,8 @@ class CheckOutItem{
     var json = {
       'name': name,
       'total': sidesAndPriceTotal(),
-      'sides': this.sides.map((side) => side.toJson()).toList()
+      'sides': this.sides.map((side) => side.toJson()).toList(),
+      'additional_instructions': additionalInstructions,
     };
     return json;
   }

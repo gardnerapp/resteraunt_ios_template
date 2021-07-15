@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 class OrderAPI extends BaseAPI {
   Future<http.Response> createOrder(
       int userId, String token, double total, List<Map<String, dynamic>> items) {
+
     // convert to cents for stripe
     double amount = total * 100;
 

@@ -19,10 +19,6 @@ void main() {
 
 /*TODOs
   web:
-
-    add devise admin , dynamic links and rerotuing
-    order index and show pages
-    order api
     fix migrations for production
 
    iOS:
