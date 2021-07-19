@@ -12,7 +12,7 @@ class OrderAPI extends BaseAPI {
 
     var body = jsonEncode({
       'id': userId,
-      'token': token,
+      'token': token, 
       'order': {
         'amount': amount.toInt(),
         'items': items,
